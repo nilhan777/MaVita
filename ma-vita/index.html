@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MaVita — Boşluklardaki hayat. Kintsugi felsefesiyle hayat bulan özel tasarım ev aksesuarları, mutfak ve takı koleksiyonu.">
+
+    <title>MaVita | Kintsugi Koleksiyonu</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <svg viewBox="0 0 120 120" class="loading-svg">
+                <defs>
+                    <linearGradient id="loadGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#D4B86A"/>
+                        <stop offset="50%" stop-color="#E8D5A3"/>
+                        <stop offset="100%" stop-color="#B8943D"/>
+                    </linearGradient>
+                </defs>
+                <!-- Monogram circle -->
+                <circle cx="60" cy="60" r="42" fill="none" stroke="rgba(250,247,242,0.12)" stroke-width="0.8"/>
+                <!-- M -->
+                <path d="M38 80 L44 48 L60 68 L76 48 L82 80" fill="none" stroke="rgba(250,247,242,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-m"/>
+                <!-- Gold crack -->
+                <path d="M24 72 C32 62 38 58 46 52 C52 48 56 44 58 38"
+                      fill="none" stroke="url(#loadGold)" stroke-width="1.2" stroke-linecap="round"
+                      class="loading-crack"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <svg viewBox="0 0 155 30" class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="navGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/>
+                            <stop offset="50%" stop-color="#E8D5A3"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Mini monogram: circle + M -->
+                    <circle cx="13" cy="15" r="10" fill="none" stroke="rgba(250,247,242,0.3)" stroke-width="0.6"/>
+                    <path d="M7 21 L9 11 L13 17 L17 11 L19 21" fill="none" stroke="rgba(250,247,242,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Tiny gold crack -->
+                    <path d="M3 20 C6 16 10 14 14 13" fill="none" stroke="url(#navGold)" stroke-width="0.7" stroke-linecap="round"/>
+                    <!-- Wordmark -->
+                    <text x="31" y="22" class="nav-logo-ma">Ma</text>
+                    <line x1="55" y1="12" x2="61" y2="18" class="nav-logo-crack"/>
+                    <text x="59" y="22" class="nav-logo-vita">Vita</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="#koleksiyon" class="nav-link">Koleksiyon</a>
+                <a href="#hikaye" class="nav-link">Hikâye</a>
+                <a href="#oyun" class="nav-link">Maç Atölyesi</a>
+                <a href="#atelier" class="nav-link">Atölye</a>
+                <a href="#iletisim" class="nav-link">İletişim</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#koleksiyon" class="mobile-link">Koleksiyon</a>
+            <a href="#hikaye" class="mobile-link">Hikâye</a>
+            <a href="#oyun" class="mobile-link">Maç Atölyesi</a>
+            <a href="#atelier" class="mobile-link">Atölye</a>
+            <a href="#iletisim" class="mobile-link">İletişim</a>
+        </div>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-texture"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-logo-wrap reveal">
+                <!-- MAVITA ARTISTIC LOGO -->
+                <svg viewBox="0 0 420 260" class="hero-logo" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Gold gradients -->
+                        <linearGradient id="goldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/>
+                            <stop offset="25%" stop-color="#E8D5A3"/>
+                            <stop offset="50%" stop-color="#C8A45C"/>
+                            <stop offset="75%" stop-color="#F0E4C8"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                        <linearGradient id="goldCrack" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#B8943D"/>
+                            <stop offset="30%" stop-color="#E8D5A3"/>
+                            <stop offset="60%" stop-color="#C8A45C"/>
+                            <stop offset="100%" stop-color="#D4B86A"/>
+                        </linearGradient>
+                        <linearGradient id="goldVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#E8D5A3"/>
+                            <stop offset="50%" stop-color="#C8A45C"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                        <!-- Glow filters -->
+                        <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="2" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="1" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- ═══ MONOGRAM: Enso Circle + M + Kintsugi Crack ═══ -->
+                    <g class="monogram-group">
+                        <!-- Outer enso circle — incomplete, brush-like -->
+                        <path d="M210 38
+                                 C256 38 295 56 316 85
+                                 C336 112 340 148 326 174
+                                 C312 200 283 216 250 220
+                                 C225 223 200 218 182 206"
+                              fill="none"
+                              stroke="rgba(250,247,242,0.12)"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              class="enso-circle"/>
+
+                        <!-- Inner subtle ring -->
+                        <circle cx="210" cy="130" r="72"
+                                fill="none"
+                                stroke="rgba(250,247,242,0.06)"
+                                stroke-width="0.5"/>
+
+                        <!-- The "M" Monogram — elegant diagonal strokes -->
+                        <g class="monogram-m" fill="none" stroke="rgba(250,247,242,0.85)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Left stem -->
+                            <path d="M177 178 L188 108"/>
+                            <!-- Right stem -->
+                            <path d="M243 178 L232 108"/>
+                            <!-- Center V — the meeting point -->
+                            <path d="M188 108 L210 158 L232 108"/>
+                        </g>
+
+                        <!-- The Kintsugi Crack — the gold repair line through the M -->
+                        <g filter="url(#goldGlow)" class="crack-group">
+                            <!-- Main crack — organic, hand-drawn feel -->
+                            <path d="M168 182
+                                     C174 168 180 155 187 148
+                                     C193 140 198 135 204 132
+                                     C209 128 212 122 213 116
+                                     C214 110 212 105 207 102
+                                     C203 100 198 102 195 107
+                                     C193 111 192 118 193 124
+                                     C195 130 199 133 204 133"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="1.8"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-path-main"/>
+
+                            <!-- Secondary crack branch -->
+                            <path d="M195 107 C198 95 208 87 218 85"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="1.2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-path-branch"
+                                  opacity="0.7"/>
+
+                            <!-- Tiny branch -->
+                            <path d="M207 102 C214 98 220 94 225 90"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="0.8"
+                                  stroke-linecap="round"
+                                  class="crack-path-tiny"
+                                  opacity="0.5"/>
+                        </g>
+
+                        <!-- Gold particles / dust around the crack -->
+                        <g filter="url(#particleGlow)" class="gold-particles">
+                            <circle cx="173" cy="175" r="1.2" fill="#E8D5A3" opacity="0.8"/>
+                            <circle cx="183" cy="152" r="0.8" fill="#C8A45C" opacity="0.6"/>
+                            <circle cx="200" cy="128" r="1.5" fill="#E8D5A3" opacity="0.7"/>
+                            <circle cx="215" cy="112" r="0.9" fill="#D4B86A" opacity="0.6"/>
+                            <circle cx="210" cy="100" r="1.1" fill="#E8D5A3" opacity="0.5"/>
+                            <circle cx="220" cy="88" r="0.7" fill="#C8A45C" opacity="0.4"/>
+                            <circle cx="193" cy="145" r="0.6" fill="#F0E4C8" opacity="0.7"/>
+                            <circle cx="176" cy="185" r="0.8" fill="#E8D5A3" opacity="0.5"/>
+                            <circle cx="205" cy="138" r="1.0" fill="#D4B86A" opacity="0.6"/>
+                            <circle cx="226" cy="93" r="0.5" fill="#E8D5A3" opacity="0.4"/>
+                        </g>
+                    </g>
+
+                    <!-- ═══ WORDMARK: Ma ——— Vita ═══ -->
+                    <g class="wordmark-group">
+                        <!-- Ma -->
+                        <text x="88" y="255" class="hero-logo-ma">Ma</text>
+
+                        <!-- Kintsugi bridge between Ma and Vita — the golden connection -->
+                        <g filter="url(#goldGlow)" class="wordmark-crack">
+                            <path d="M188 248
+                                     C194 244 198 238 201 235
+                                     C204 232 206 230 210 231
+                                     C214 232 216 234 219 236
+                                     C222 238 226 242 232 245"
+                                  fill="none"
+                                  stroke="url(#goldMain)"
+                                  stroke-width="1.6"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-wordmark"/>
+                        </g>
+
+                        <!-- Vita -->
+                        <text x="232" y="255" class="hero-logo-vita">Vita</text>
+                    </g>
+                </svg>
+            </div>
+            <p class="hero-tagline reveal delay-1">Boşluklardaki hayat. Kırıktaki altın.</p>
+            <div class="hero-scroll reveal delay-2">
+                <span>Keşfet</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="scroll-icon">
+                    <path d="M12 5v14M5 12l7 7 7-7" stroke="#C8A45C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FELSEFE ŞERİDİ ============ -->
+    <section class="philosophy-strip">
+        <div class="philosophy-inner">
+            <p class="philosophy-text reveal">
+                <span class="italic">Ma</span> — aradaki boşluk. Sessizliğin kendisi.
+                <span class="italic">Vita</span> — hayatın ta kendisi.
+                Aradaki altın çizgi: <span class="gold">Kintsugi</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============ KOLEKSİYON ============ -->
+    <section class="collection" id="koleksiyon">
+        <div class="section-header reveal">
+            <span class="section-tag">Koleksiyon</span>
+            <h2 class="section-title">Seçme Parçalar</h2>
+            <p class="section-desc">Her biri bir ustanın elinden. Her biri bir hikâye.</p>
+        </div>
+
+        <div class="collection-grid">
+            <!-- Ürün 1 — Kintsugi Kase Indigo -->
+            <article class="product-card reveal" data-category="mutfak">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #0A1628 0%, #1B3A5C 35%, #2A5580 60%, #6B8FB5 85%, #C8A45C 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <ellipse cx="50" cy="45" rx="30" ry="22" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+                                <ellipse cx="50" cy="42" rx="20" ry="14" stroke="rgba(255,255,255,.15)" stroke-width="0.8"/>
+                                <path d="M28 40 C32 48 38 58 50 56 C62 54 68 46 72 38"
+                                      fill="none" stroke="url(#productGold1)" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+                                <path d="M33 55 C37 62 42 70 50 68 C58 66 63 60 67 54"
+                                      fill="none" stroke="url(#productGold1)" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <defs>
+                                    <linearGradient id="productGold1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#C8A45C"/><stop offset="50%" stop-color="#E8D5A3"/><stop offset="100%" stop-color="#B8943D"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Özel Koleksiyon</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Mutfak</span>
+                    <h3 class="product-name">Kintsugi Kase — Indigo</h3>
+                    <p class="product-desc">Japon porseleni, çatlakları 24 ayar altın tozuyla onarılmış. Her kase, kendi kırılma hikâyesiyle benzersiz. Kobalt mavisi sır, Edo dönemi geleneğinden.</p>
+                    <span class="product-price">₺4.200</span>
+                </div>
+            </article>
+
+            <!-- Ürün 2 — Oroİz Kolye -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #0F1E2E 0%, #1A1528 25%, #2A1B3D 50%, #1B3A5C 75%, #C8A45C 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M35 20 C30 40 25 60 50 75 C75 60 70 40 65 20"
+                                      stroke="rgba(200,164,92,.5)" stroke-width="1.2" fill="none"/>
+                                <path d="M50 75 L50 88" stroke="rgba(200,164,92,.6)" stroke-width="1"/>
+                                <circle cx="50" cy="22" r="5" fill="none" stroke="rgba(200,164,92,.7)" stroke-width="1.2"/>
+                                <path d="M42 35 C45 45 48 55 50 60 C52 55 55 45 58 35"
+                                      fill="none" stroke="rgba(255,255,255,.3)" stroke-width="0.8" stroke-dasharray="3 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">En Çok Satan</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Oroİz Kolye — Kırık Hat</h3>
+                    <p class="product-desc">Kintsugi'deki altın çatlağın kolyeye dönüşmüş hali. Sterling gümüş üzerine 24 ayar altın kaplama. Her kolyenin çatlak deseni, döküm anındaki benzersiz akışla oluşur.</p>
+                    <span class="product-price">₺8.900</span>
+                </div>
+            </article>
+
+            <!-- Ürün 3 — LuceBlu Vazo -->
+            <article class="product-card reveal" data-category="aksesuar">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #E8D5B7 0%, #FAF7F2 20%, #D4C5A9 40%, #1B3A5C 70%, #0F1E2E 100%);">
+                        <div class="product-icon dark-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M35 85 C35 60 30 40 38 25 C42 18 48 15 50 15 C52 15 58 18 62 25 C70 40 65 60 65 85"
+                                      stroke="rgba(27,58,92,.5)" stroke-width="1.4" fill="none"/>
+                                <path d="M42 30 C44 45 40 60 43 78" stroke="rgba(200,164,92,.55)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                <ellipse cx="50" cy="22" rx="8" ry="3" stroke="rgba(27,58,92,.3)" stroke-width="0.8" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Yeni</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Aksesuar</span>
+                    <h3 class="product-name">LuceBlu Vazo — Ege Işığı</h3>
+                    <p class="product-desc">Venedik'te ağızdan üflenmiş cam, içinden geçen altın damarla. Ege güneşinin suya vurduğu anı yakalar. Her vazoda ışık farklı kırılır — tıpkı deniz gibi.</p>
+                    <span class="product-price">₺7.200</span>
+                </div>
+            </article>
+
+            <!-- Ürün 4 — Marea Bilezik -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #0F1E2E 0%, #1B3A5C 30%, #2A5580 55%, #8AB4D8 80%, #C8A45C 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <ellipse cx="50" cy="50" rx="28" ry="18" stroke="rgba(200,164,92,.45)" stroke-width="1.2"/>
+                                <path d="M22 50 C22 70 35 78 50 78 C65 78 78 70 78 50"
+                                      stroke="rgba(200,164,92,.6)" stroke-width="1.5" fill="none"/>
+                                <path d="M30 45 Q40 35 50 42 Q60 35 70 45"
+                                      stroke="rgba(255,255,255,.25)" stroke-width="0.8" fill="none"/>
+                                <circle cx="35" cy="48" r="2" fill="rgba(200,164,92,.5)"/>
+                                <circle cx="50" cy="43" r="2" fill="rgba(200,164,92,.6)"/>
+                                <circle cx="65" cy="48" r="2" fill="rgba(200,164,92,.5)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Marea Bilezik — Dalga</h3>
+                    <p class="product-desc">Ege'nin gelgit ritmi, 925 gümüş üzerine altın kaplamayla bileğe taşınıyor. İtalyan kuyumcu işçiliği. Açık uçları, tamamlanmamış bir hikâye gibi.</p>
+                    <span class="product-price">₺6.500</span>
+                </div>
+            </article>
+
+            <!-- Ürün 5 — Egeo Keten Örtü -->
+            <article class="product-card reveal" data-category="tekstil">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #FAF7F2 0%, #E8D5B7 25%, #D4C5A9 50%, #C8A45C 70%, #1B3A5C 100%);">
+                        <div class="product-icon dark-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <rect x="20" y="25" width="60" height="50" rx="1" stroke="rgba(27,58,92,.3)" stroke-width="1"/>
+                                <path d="M30 30 L35 50 L45 35 L55 55 L60 40 L70 45" stroke="rgba(200,164,92,.4)" stroke-width="0.8" fill="none"/>
+                                <path d="M30 60 L45 55 L60 65 L70 58" stroke="rgba(27,58,92,.2)" stroke-width="0.6" fill="none"/>
+                                <circle cx="28" cy="28" r="1.5" fill="rgba(200,164,92,.5)"/>
+                                <circle cx="68" cy="42" r="1.5" fill="rgba(200,164,92,.4)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Ev Tekstili</span>
+                    <h3 class="product-name">Egeo Keten Örtü — Kum</h3>
+                    <p class="product-desc">Urla'nın son keten dokuma atölyesinde, üçüncü kuşak bir ustanın tezgâhından. Doğal taş ve deniz kabuğu baskıları. Her kullanımda yumuşar, hikâyenize katılır.</p>
+                    <span class="product-price">₺3.600</span>
+                </div>
+            </article>
+
+            <!-- Ürün 6 — Tramonto Tabak -->
+            <article class="product-card reveal" data-category="mutfak">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #1B3A5C 0%, #3A6B9C 20%, #E8965B 50%, #D4834A 70%, #C8A45C 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="30" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+                                <circle cx="50" cy="50" r="24" stroke="rgba(255,255,255,.15)" stroke-width="0.8"/>
+                                <circle cx="50" cy="50" r="28" stroke="rgba(200,164,92,.5)" stroke-width="1.5" stroke-dasharray="4 6"/>
+                                <circle cx="50" cy="50" r="10" fill="none" stroke="rgba(200,164,92,.35)" stroke-width="0.8"/>
+                                <circle cx="50" cy="50" r="3" fill="rgba(200,164,92,.4)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Sınırlı Seri</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Mutfak</span>
+                    <h3 class="product-name">Tramonto Tabak Seti — Günbatımı</h3>
+                    <p class="product-desc">Amalfi sahilinde güneşin denize düştüğü an, Japon seramiğine aktarıldı. 24 ayar altın rim, elle sürülür. 6 parça, her biri farklı bir günbatımı tonunda.</p>
+                    <span class="product-price">₺12.800</span>
+                </div>
+            </article>
+
+            <!-- Ürün 7 — Giunto Yüzük -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #0F1E2E 0%, #1B1A2E 30%, #1B3A5C 55%, #2A5580 80%, #C8A45C 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="20" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+                                <circle cx="50" cy="50" r="16" stroke="rgba(200,164,92,.5)" stroke-width="1.5"/>
+                                <path d="M42 38 C38 44 42 52 50 50 C58 48 62 54 58 60"
+                                      stroke="rgba(255,255,255,.35)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                <circle cx="50" cy="50" r="4" fill="none" stroke="rgba(200,164,92,.6)" stroke-width="0.8"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Özel Koleksiyon</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Giunto Yüzük — Bağ</h3>
+                    <p class="product-desc">İki ayrı metal —sterling gümüş ve pirinç— altın bir çatlakla birleşiyor. Kintsugi'nin "birleşme" felsefesinin yüzüğe dökülmüş hali. Tek beden, el işçiliği.</p>
+                    <span class="product-price">₺5.800</span>
+                </div>
+            </article>
+
+            <!-- Ürün 8 — Brezza Perde -->
+            <article class="product-card reveal" data-category="tekstil">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background: linear-gradient(160deg, #0F1E2E 0%, #1B3A5C 30%, #4A7A9E 50%, #8AB4D8 70%, #FAF7F2 100%);">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 20 Q30 15 50 20 Q70 25 80 20" stroke="rgba(255,255,255,.2)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 35 Q35 25 50 32 Q65 25 80 35" stroke="rgba(255,255,255,.25)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 50 Q30 42 50 48 Q70 42 80 50" stroke="rgba(255,255,255,.2)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 65 Q35 55 50 62 Q65 55 80 65" stroke="rgba(255,255,255,.15)" stroke-width="0.8" fill="none"/>
+                                <path d="M40 15 C42 35 38 55 45 75" stroke="rgba(200,164,92,.35)" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                <path d="M60 15 C58 35 62 55 55 75" stroke="rgba(200,164,92,.25)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Ev Tekstili</span>
+                    <h3 class="product-name">Brezza Perde — Meltem</h3>
+                    <p class="product-desc">Ege melteminin pencereden süzülüşü, keten-pamuk karışımı bir dokumaya dönüştü. Işığı kırmadan süzer, odayı yıkar. Aile dokuma tezgâhında üretilir, doğal kök boya.</p>
+                    <span class="product-price">₺5.400</span>
+                </div>
+            </article>
+        </div>
+
+        <div class="collection-cta reveal">
+            <a href="#" class="btn-outline">Tüm Koleksiyonu Gör</a>
+        </div>
+    </section>
+
+    <!-- ============ MAÇ ATÖLYESİ (OYUN) ============ -->
+    <section class="match-game" id="oyun">
+        <div class="section-header reveal">
+            <span class="section-tag">Maç Atölyesi</span>
+            <h2 class="section-title">Birlikte Eşleştir</h2>
+            <p class="section-desc">Parçaları bir araya getir, kendi kompozisyonunu yarat. Tıkla, eşle, ilham al.</p>
+        </div>
+
+        <div class="match-container">
+            <div class="match-panel match-left" id="matchLeft">
+                <h3 class="match-panel-title">Parça Seç</h3>
+                <div class="match-items">
+                    <div class="match-item" data-match="1" data-name="Indigo Kase">
+                        <span class="match-emoji">🏺</span>
+                        <span class="match-label">Kintsugi Kase — Indigo</span>
+                        <span class="match-cat">Mutfak</span>
+                    </div>
+                    <div class="match-item" data-match="2" data-name="Kırık Hat Kolye">
+                        <span class="match-emoji">📿</span>
+                        <span class="match-label">Oroİz Kolye — Kırık Hat</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                    <div class="match-item" data-match="3" data-name="Günbatımı Tabak">
+                        <span class="match-emoji">🍽️</span>
+                        <span class="match-label">Tramonto Tabak Seti</span>
+                        <span class="match-cat">Mutfak</span>
+                    </div>
+                    <div class="match-item" data-match="4" data-name="Dalga Bilezik">
+                        <span class="match-emoji">💫</span>
+                        <span class="match-label">Marea Bilezik — Dalga</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-canvas" id="matchCanvas">
+                <div class="match-canvas-inner">
+                    <div class="match-slot slot-left" id="slotLeft">
+                        <span class="slot-placeholder">?</span>
+                        <span class="slot-hint">Sol parça</span>
+                    </div>
+                    <div class="match-connector">
+                        <svg viewBox="0 0 60 60" class="match-plus">
+                            <circle cx="30" cy="30" r="28" fill="none" stroke="#C8A45C" stroke-width="0.8" opacity="0.4"/>
+                            <line x1="18" y1="30" x2="42" y2="30" stroke="#C8A45C" stroke-width="1"/>
+                            <line x1="30" y1="18" x2="30" y2="42" stroke="#C8A45C" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="match-slot slot-right" id="slotRight">
+                        <span class="slot-placeholder">?</span>
+                        <span class="slot-hint">Sağ parça</span>
+                    </div>
+                </div>
+                <div class="match-result" id="matchResult">
+                    <p class="match-result-text">İki parça seç, uyumlarını gör.</p>
+                </div>
+                <button class="btn-reset" id="matchReset">Temizle</button>
+            </div>
+
+            <div class="match-panel match-right" id="matchRight">
+                <h3 class="match-panel-title">Eşlik Et</h3>
+                <div class="match-items">
+                    <div class="match-item" data-match="5" data-name="Kum Keten Örtü">
+                        <span class="match-emoji">🧵</span>
+                        <span class="match-label">Egeo Keten Örtü — Kum</span>
+                        <span class="match-cat">Tekstil</span>
+                    </div>
+                    <div class="match-item" data-match="6" data-name="Meltem Perde">
+                        <span class="match-emoji">🪟</span>
+                        <span class="match-label">Brezza Perde — Meltem</span>
+                        <span class="match-cat">Tekstil</span>
+                    </div>
+                    <div class="match-item" data-match="7" data-name="LuceBlu Vazo">
+                        <span class="match-emoji">🏮</span>
+                        <span class="match-label">LuceBlu Vazo — Ege Işığı</span>
+                        <span class="match-cat">Aksesuar</span>
+                    </div>
+                    <div class="match-item" data-match="8" data-name="Giunto Yüzük">
+                        <span class="match-emoji">💍</span>
+                        <span class="match-label">Giunto Yüzük — Bağ</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ HİKAYE ============ -->
+    <section class="story" id="hikaye">
+        <div class="story-grid">
+            <div class="story-visual reveal">
+                <div class="story-image">
+                    <div class="story-placeholder">
+                        <div class="story-kintsugi">
+                            <svg viewBox="0 0 200 200" class="story-svg">
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(200,164,92,.15)" stroke-width="0.5"/>
+                                <path d="M60 100 Q75 70 100 95 T140 90" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+                                <path d="M55 80 Q80 130 110 100" fill="none" stroke="#C8A45C" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <path d="M120 60 Q105 85 135 110" fill="none" stroke="#C8A45C" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <circle cx="100" cy="100" r="3" fill="#C8A45C" opacity="0.6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="story-content">
+                <div class="story-text reveal">
+                    <span class="section-tag">MaVita Hikâyesi</span>
+                    <h2 class="section-title">Kırığın İçindeki Altın</h2>
+                    <p class="story-para">Ailem üç kuşaktır ev tekstili üretiyor. Her dokumanın, her ipliğin bir hikâyesi vardı. Ama ben o hikâyeyi daha ileri taşımak istedim — bir adım öteye, <em>mavinin ötesine.</em></p>
+                    <p class="story-para">Japonya'da ilk kez bir Kintsugi ustasını izlediğimde anladım: Kırılan her şey, altınla onarıldığında eskisinden daha değerli olur. Bu felsefe, MaVita'nın doğuşu oldu.</p>
+                    <p class="story-para">Bugün MaVita'da, Ege'nin mavisiyle İtalyan zarafetini, Japon sabrıyla birleştiriyoruz. Her parçamız — ister bir tabak, ister bir kolye — o altın çatlağın izini taşır.</p>
+                    <p class="story-signature gold">— MaVita Atölyesi, Urla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ATÖLYE ============ -->
+    <section class="atelier" id="atelier">
+        <div class="section-header reveal">
+            <span class="section-tag">Atölye</span>
+            <h2 class="section-title">Sizin İçin Tasarlıyoruz</h2>
+            <p class="section-desc">Özel siparişleriniz, MaVita ustalarının ellerinde hayat bulur.</p>
+        </div>
+
+        <div class="atelier-steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3 class="step-title">Keşif</h3>
+                <p class="step-desc">Sizi, mekânınızı ve hikâyenizi tanıyoruz. İlham panonuzu birlikte oluşturuyoruz.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-1">
+                <div class="step-number">02</div>
+                <h3 class="step-title">Tasarım</h3>
+                <p class="step-desc">Ustalarımız, sizin hikâyenizi altın, gümüş, seramik ve ketenle yorumluyor.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-2">
+                <div class="step-number">03</div>
+                <h3 class="step-title">Üretim</h3>
+                <p class="step-desc">Her parça elde şekillenir. Acele etmeyiz. Sabır, MaVita'nın en değerli malzemesidir.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-3">
+                <div class="step-number">04</div>
+                <h3 class="step-title">Teslim</h3>
+                <p class="step-desc">Eseriniz, özel MaVita kutusunda, bir Kintsugi hikâyesiyle birlikte size ulaşır.</p>
+            </div>
+        </div>
+
+        <div class="atelier-cta reveal">
+            <a href="#iletisim" class="btn-gold">Özel Tasarım Talep Et</a>
+        </div>
+    </section>
+
+    <!-- ============ DEĞERLER ============ -->
+    <section class="values">
+        <div class="values-grid">
+            <div class="value-item reveal">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#C8A45C" stroke-width="0.8"/><path d="M20 8v24M8 20h24" stroke="#C8A45C" stroke-width="0.6"/></svg>
+                </div>
+                <h4>El İşçiliği</h4>
+                <p>Her parça, ustanın elinden çıkar. Makine değil, insan.</p>
+            </div>
+            <div class="value-item reveal delay-1">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><path d="M8 30c0-6 5-12 12-12s12 6 12 12" stroke="#C8A45C" stroke-width="0.8" fill="none"/><circle cx="20" cy="14" r="4" stroke="#C8A45C" stroke-width="0.8" fill="none"/></svg>
+                </div>
+                <h4>Aile Mirası</h4>
+                <p>Üç kuşağın dokuma bilgisi, şimdi yeni formlarda.</p>
+            </div>
+            <div class="value-item reveal delay-2">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><rect x="6" y="10" width="28" height="22" rx="2" stroke="#C8A45C" stroke-width="0.8" fill="none"/><path d="M14 20l4 4 8-8" stroke="#C8A45C" stroke-width="0.8" fill="none"/></svg>
+                </div>
+                <h4>Sürdürülebilirlik</h4>
+                <p>Doğal malzeme, yerel üretim, minimum atık.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ İLETİŞİM ============ -->
+    <section class="contact" id="iletisim">
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <span class="section-tag">İletişim</span>
+                <h2 class="section-title">Sizi Dinleyelim</h2>
+                <p class="contact-desc">Özel bir tasarım, koleksiyon hakkında soru ya da sadece merhaba demek için.</p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <span class="detail-label">Atölye</span>
+                        <span>Urla, İzmir — Ege Kıyısı</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-label">E-Posta</span>
+                        <span>merhaba@mavita.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-label">Telefon</span>
+                        <span>+90 (232) 700 00 00</span>
+                    </div>
+                </div>
+                <p class="contact-note gold">Atölye ziyaretleri randevu iledir.</p>
+            </div>
+            <div class="contact-form-wrap reveal delay-1">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required placeholder="Adınız">
+                        <label for="name">Adınız</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder="E-postanız">
+                        <label for="email">E-postanız</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="interest">
+                            <option value="">İlgi Alanınız</option>
+                            <option value="takı">Özel Tasarım Takı</option>
+                            <option value="mutfak">Mutfak Koleksiyonu</option>
+                            <option value="tekstil">Ev Tekstili</option>
+                            <option value="ozel">Kişiye Özel Sipariş</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" required placeholder="Mesajınız"></textarea>
+                        <label for="message">Mesajınız</label>
+                    </div>
+                    <button type="submit" class="btn-gold btn-submit">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <svg viewBox="0 0 120 28" class="footer-logo-svg">
+                    <defs>
+                        <linearGradient id="ftGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/><stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Mini monogram -->
+                    <circle cx="11" cy="14" r="8" fill="none" stroke="rgba(250,247,242,0.2)" stroke-width="0.5"/>
+                    <path d="M5 19 L7 11 L11 15 L15 11 L17 19" fill="none" stroke="rgba(250,247,242,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17 C5 14 8 13 11 12" fill="none" stroke="url(#ftGold)" stroke-width="0.6" stroke-linecap="round"/>
+                    <!-- Wordmark -->
+                    <text x="27" y="21" class="footer-logo-ma">Ma</text>
+                    <line x1="49" y1="11" x2="54" y2="17" class="footer-logo-crack"/>
+                    <text x="53" y="21" class="footer-logo-vita">Vita</text>
+                </svg>
+                <p>Boşluklardaki hayat. Kırıktaki altın.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <a href="#koleksiyon">Koleksiyon</a>
+                    <a href="#hikaye">Hikâye</a>
+                    <a href="#oyun">Maç Atölyesi</a>
+                </div>
+                <div class="footer-col">
+                    <h4>MaVita</h4>
+                    <a href="#atelier">Atölye</a>
+                    <a href="#iletisim">İletişim</a>
+                    <a href="#">SSS</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Takip Et</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Pinterest</a>
+                    <a href="#">Journal</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MaVita. Tüm hakları saklıdır. Urla, İzmir'de üretilmiştir.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
