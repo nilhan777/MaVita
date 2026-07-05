@@ -3012,5 +3012,3054 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MaVita — Boşluklardaki hayat. Kintsugi felsefesiyle hayat bulan özel tasarım ev aksesuarları, mutfak ve takı koleksiyonu.">
+
+    <title>MaVita | Kintsugi Koleksiyonu</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+/* ═══════════════════════════════════════════════════════
+   MaVita — Premium Luxury Brand
+   Color Palette & Design Tokens
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+    /* ── Ana Renkler ── */
+    --mavi:        #1B3A5C;
+    --mavi-light:  #2A5580;
+    --mavi-dark:   #0F1E2E;
+    --altin:       #C8A45C;
+    --altin-light: #E8D5A3;
+    --altin-dark:  #B8943D;
+    --tas:         #FAF7F2;
+    --kum:         #E8D5B7;
+    --abanoz:      #0F1E2E;
+    --inci:        #F5F0E8;
+
+    /* ── Gradient ── */
+    --gold-grad:   linear-gradient(135deg, #C8A45C 0%, #E8D5A3 40%, #B8943D 100%);
+    --mavi-grad:   linear-gradient(180deg, #1B3A5C 0%, #0F1E2E 100%);
+
+    /* ── Tipografi ── */
+    --font-serif:  'Cormorant Garamond', Georgia, serif;
+    --font-sans:   'Inter', -apple-system, sans-serif;
+
+    /* ── Spacing ── */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 24px;
+    --space-lg: 48px;
+    --space-xl: 80px;
+    --space-2xl: 120px;
+    --space-3xl: 200px;
+
+    /* ── Transitions ── */
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --duration-slow: 800ms;
+    --duration-med: 500ms;
+    --duration-fast: 300ms;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Reset & Base
+   ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: none;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: var(--abanoz);
+    background: var(--tas);
+    line-height: 1.7;
+    overflow-x: hidden;
+    letter-spacing: 0.02em;
+}
+
+::selection {
+    background: rgba(200, 164, 92, 0.3);
+    color: var(--mavi-dark);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Custom Cursor
+   ═══════════════════════════════════════════════════════ */
+
+.cursor {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--altin);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 164, 92, 0.4);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                width 0.3s ease, height 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower.hover {
+    width: 60px;
+    height: 60px;
+    border-color: var(--altin);
+    background: rgba(200, 164, 92, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Loading Screen
+   ═══════════════════════════════════════════════════════ */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--mavi-dark);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-logo {
+    width: 120px;
+    height: 120px;
+}
+
+.loading-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.loading-m {
+    stroke-dasharray: 160;
+    stroke-dashoffset: 160;
+    animation: drawStroke 1.5s var(--ease-out) 0.3s forwards;
+}
+
+.loading-crack {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: drawCrack 1.5s var(--ease-out) 0.8s forwards;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Navigation
+   ═══════════════════════════════════════════════════════ */
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 var(--space-lg);
+    transition: background 0.4s ease, padding 0.4s ease;
+}
+
+.nav.scrolled {
+    background: rgba(15, 30, 46, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 12px var(--space-lg);
+    border-bottom: 1px solid rgba(200, 164, 92, 0.1);
+}
+
+.nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    transition: padding 0.4s ease;
+}
+
+.nav.scrolled .nav-inner {
+    padding: 0;
+}
+
+.nav-logo {
+    text-decoration: none;
+    display: block;
+    width: 140px;
+}
+
+.nav-logo-svg {
+    width: 100%;
+    height: auto;
+}
+
+.nav-logo-ma,
+.nav-logo-vita {
+    font-family: var(--font-serif);
+    font-size: 22px;
+}
+
+.nav-logo-ma {
+    fill: var(--tas);
+    font-weight: 300;
+}
+
+.nav-logo-vita {
+    fill: var(--tas);
+    font-weight: 400;
+}
+
+.nav-logo-crack {
+    stroke: var(--altin);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: rgba(250, 247, 242, 0.75);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--altin);
+    transition: width 0.4s var(--ease-out);
+}
+
+.nav-link:hover {
+    color: var(--altin);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Mobile Toggle */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 101;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--tas);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.active span:first-child {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-toggle.active span:last-child {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--mavi-dark);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.mobile-link {
+    text-decoration: none;
+    color: var(--tas);
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    transition: color 0.3s ease;
+}
+
+.mobile-link:hover {
+    color: var(--altin);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Hero Section
+   ═══════════════════════════════════════════════════════ */
+
+.hero {
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--mavi-grad);
+}
+
+.hero-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(200, 164, 92, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(27, 58, 92, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(200, 164, 92, 0.04) 0%, transparent 70%);
+}
+
+.hero-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,.5) 2px,
+            rgba(255,255,255,.5) 4px
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 var(--space-md);
+}
+
+.hero-logo-wrap {
+    margin-bottom: var(--space-md);
+}
+
+.hero-logo {
+    width: min(420px, 90vw);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ── Monogram ── */
+
+.monogram-group {
+    opacity: 0;
+    animation: fadeInMonogram 1.2s var(--ease-out) 0.3s forwards;
+}
+
+@keyframes fadeInMonogram {
+    to { opacity: 1; }
+}
+
+.enso-circle {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: drawEnso 2s var(--ease-out) 0.6s forwards;
+}
+
+@keyframes drawEnso {
+    to { stroke-dashoffset: 0; }
+}
+
+.monogram-m path {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+}
+
+.monogram-m path:nth-child(1) {
+    animation: drawStroke 0.7s var(--ease-out) 1.2s forwards;
+}
+.monogram-m path:nth-child(2) {
+    animation: drawStroke 0.7s var(--ease-out) 1.4s forwards;
+}
+.monogram-m path:nth-child(3) {
+    animation: drawStroke 0.7s var(--ease-out) 1.6s forwards;
+}
+
+@keyframes drawStroke {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ── Crack paths in monogram ── */
+
+.crack-path-main {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: drawCrackMain 1.5s var(--ease-out) 1.8s forwards;
+}
+
+.crack-path-branch {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: drawCrackBranch 1s var(--ease-out) 2.2s forwards;
+}
+
+.crack-path-tiny {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: drawCrackBranch 0.8s var(--ease-out) 2.5s forwards;
+}
+
+@keyframes drawCrackMain {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawCrackBranch {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ── Gold particles ── */
+
+.gold-particles circle {
+    opacity: 0;
+}
+
+.gold-particles circle:nth-child(1)  { animation: sparkle 2s ease-in-out 2.2s infinite; }
+.gold-particles circle:nth-child(2)  { animation: sparkle 2.2s ease-in-out 2.3s infinite; }
+.gold-particles circle:nth-child(3)  { animation: sparkle 1.8s ease-in-out 2.4s infinite; }
+.gold-particles circle:nth-child(4)  { animation: sparkle 2.4s ease-in-out 2.5s infinite; }
+.gold-particles circle:nth-child(5)  { animation: sparkle 1.9s ease-in-out 2.6s infinite; }
+.gold-particles circle:nth-child(6)  { animation: sparkle 2.1s ease-in-out 2.7s infinite; }
+.gold-particles circle:nth-child(7)  { animation: sparkle 2.3s ease-in-out 2.8s infinite; }
+.gold-particles circle:nth-child(8)  { animation: sparkle 1.7s ease-in-out 2.9s infinite; }
+.gold-particles circle:nth-child(9)  { animation: sparkle 2.0s ease-in-out 3.0s infinite; }
+.gold-particles circle:nth-child(10) { animation: sparkle 2.2s ease-in-out 3.1s infinite; }
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    30% { opacity: 0.8; transform: scale(1.2); }
+    60% { opacity: 0.2; transform: scale(0.8); }
+}
+
+/* ── Wordmark ── */
+
+.wordmark-group {
+    opacity: 0;
+    animation: fadeInWordmark 1s var(--ease-out) 2s forwards;
+}
+
+@keyframes fadeInWordmark {
+    to { opacity: 1; }
+}
+
+.hero-logo-ma,
+.hero-logo-vita {
+    font-family: var(--font-serif);
+    font-size: 58px;
+    fill: var(--tas);
+}
+
+.hero-logo-ma {
+    font-weight: 200;
+    letter-spacing: 6px;
+}
+
+.hero-logo-vita {
+    font-weight: 400;
+    letter-spacing: 3px;
+}
+
+.crack-wordmark {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: drawCrackWordmark 1s var(--ease-out) 2.5s forwards;
+}
+
+@keyframes drawCrackWordmark {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ── Legacy crack-path (kept for compatibility) ── */
+
+.crack-path {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: drawCrack 2s var(--ease-out) 0.8s forwards;
+}
+
+@keyframes drawCrack {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.hero-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(250, 247, 242, 0.7);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    color: rgba(250, 247, 242, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.scroll-icon {
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   Philosophy Strip
+   ═══════════════════════════════════════════════════════ */
+
+.philosophy-strip {
+    padding: var(--space-2xl) var(--space-md);
+    background: var(--mavi-dark);
+    text-align: center;
+}
+
+.philosophy-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--tas);
+    letter-spacing: 0.03em;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.philosophy-text .italic {
+    font-style: italic;
+    color: var(--altin-light);
+}
+
+.philosophy-text .gold {
+    color: var(--altin);
+    font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Section Headers (Shared)
+   ═══════════════════════════════════════════════════════ */
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    padding: 0 var(--space-md);
+}
+
+.section-tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--altin);
+    margin-bottom: var(--space-sm);
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--mavi-dark);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-sm);
+}
+
+.section-desc {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(15, 30, 46, 0.6);
+    letter-spacing: 0.03em;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Collection
+   ═══════════════════════════════════════════════════════ */
+
+.collection {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+/* Product Card */
+.product-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.product-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-image {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    cursor: pointer;
+}
+
+.product-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.8s var(--ease-out);
+    background-color: var(--mavi-dark);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Subtle dark overlay for product images so icons/badges stay readable */
+.product-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 30, 46, 0.25);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.product-card:hover .product-placeholder::after {
+    opacity: 0.5;
+}
+
+/* SVG icon stays above the overlay */
+.product-placeholder .product-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.product-card:hover .product-placeholder {
+    transform: scale(1.05);
+}
+
+.product-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.product-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.dark-icon svg circle,
+.dark-icon svg path {
+    stroke: rgba(27, 58, 92, 0.5);
+}
+
+.product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 30, 46, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1;
+}
+
+/* Product badge */
+.product-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 5px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tas);
+    background: rgba(15, 30, 46, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.product-view {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tas);
+    padding: 12px 28px;
+    border: 1px solid rgba(250, 247, 242, 0.5);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.product-view:hover {
+    background: rgba(200, 164, 92, 0.2);
+    border-color: var(--altin);
+}
+
+.product-info {
+    padding: 0 var(--space-xs);
+}
+
+.product-category {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--altin-dark);
+}
+
+.product-name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--mavi-dark);
+    margin: var(--space-xs) 0;
+    letter-spacing: 0.02em;
+}
+
+.product-desc {
+    font-size: 0.85rem;
+    color: rgba(15, 30, 46, 0.55);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+    font-weight: 300;
+}
+
+.product-price {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--altin-dark);
+    letter-spacing: 0.03em;
+}
+
+.collection-cta {
+    text-align: center;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 14px 40px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--mavi-dark);
+    border: 1px solid rgba(15, 30, 46, 0.3);
+    transition: all 0.4s ease;
+}
+
+.btn-outline:hover {
+    border-color: var(--altin);
+    color: var(--altin-dark);
+    background: rgba(200, 164, 92, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Match Game (Interactive)
+   ═══════════════════════════════════════════════════════ */
+
+.match-game {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--inci);
+    position: relative;
+}
+
+.match-game::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 164, 92, 0.3), transparent);
+}
+
+.match-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+/* Match Panels */
+.match-panel {
+    background: white;
+    border: 1px solid rgba(15, 30, 46, 0.06);
+    padding: var(--space-md);
+}
+
+.match-panel-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--mavi-dark);
+    margin-bottom: var(--space-md);
+    text-align: center;
+    letter-spacing: 0.04em;
+}
+
+.match-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.match-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--tas);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.match-item:hover {
+    border-color: var(--altin);
+    background: rgba(200, 164, 92, 0.05);
+    transform: translateX(4px);
+}
+
+.match-item.selected {
+    border-color: var(--altin);
+    background: rgba(200, 164, 92, 0.08);
+    box-shadow: 0 0 0 1px rgba(200, 164, 92, 0.2);
+}
+
+.match-emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.match-label {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--mavi-dark);
+    flex: 1;
+}
+
+.match-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--altin-dark);
+    font-weight: 500;
+}
+
+/* Match Canvas */
+.match-canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+}
+
+.match-canvas-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    justify-content: center;
+}
+
+.match-slot {
+    width: 140px;
+    height: 180px;
+    border: 2px dashed rgba(15, 30, 46, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    transition: all 0.4s ease;
+    background: white;
+}
+
+.match-slot.filled {
+    border-style: solid;
+    border-color: var(--altin);
+    background: rgba(200, 164, 92, 0.04);
+    animation: slotGlow 2s ease-in-out infinite;
+}
+
+@keyframes slotGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(200, 164, 92, 0); }
+    50% { box-shadow: 0 0 30px rgba(200, 164, 92, 0.08); }
+}
+
+.slot-placeholder {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: rgba(15, 30, 46, 0.1);
+}
+
+.slot-hint {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(15, 30, 46, 0.25);
+}
+
+.slot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.slot-content .match-emoji {
+    font-size: 2.5rem;
+}
+
+.slot-content .match-label {
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.match-plus {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.match-result {
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.match-result-text {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(15, 30, 46, 0.5);
+    letter-spacing: 0.03em;
+    transition: all 0.4s ease;
+}
+
+.match-result-text.match-found {
+    color: var(--altin-dark);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.3rem;
+    animation: resultReveal 0.6s var(--ease-out);
+}
+
+@keyframes resultReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.match-score {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--altin);
+    letter-spacing: 0.08em;
+    animation: resultReveal 0.8s var(--ease-out);
+}
+
+.match-result-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-reset {
+    background: none;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(15, 30, 46, 0.4);
+    cursor: pointer;
+    padding: 8px 20px;
+    transition: color 0.3s ease;
+}
+
+.btn-reset:hover {
+    color: var(--mavi-dark);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Story Section
+   ═══════════════════════════════════════════════════════ */
+
+.story {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+}
+
+.story-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-placeholder {
+    width: min(400px, 80vw);
+    aspect-ratio: 1;
+    background-color: var(--inci);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.story-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1px solid rgba(200, 164, 92, 0.2);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.story-placeholder .story-kintsugi {
+    position: relative;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.story-kintsugi {
+    width: 200px;
+    height: 200px;
+}
+
+.story-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.story-text {
+    max-width: 520px;
+}
+
+.story-para {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: rgba(15, 30, 46, 0.7);
+    margin-bottom: var(--space-md);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+.story-para em {
+    font-style: italic;
+    color: var(--mavi-light);
+}
+
+.story-signature {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: var(--space-md);
+}
+
+.gold {
+    color: var(--altin-dark);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Atelier Section
+   ═══════════════════════════════════════════════════════ */
+
+.atelier {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--mavi-dark);
+    color: var(--tas);
+}
+
+.atelier .section-tag {
+    color: var(--altin);
+}
+
+.atelier .section-title {
+    color: var(--tas);
+}
+
+.atelier .section-desc {
+    color: rgba(250, 247, 242, 0.6);
+}
+
+.atelier-steps {
+    max-width: 1000px;
+    margin: var(--space-xl) auto;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.step.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-number {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--altin);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.04em;
+}
+
+.step-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-sm);
+}
+
+.step-desc {
+    font-size: 0.85rem;
+    color: rgba(250, 247, 242, 0.55);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.step-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(200, 164, 92, 0.25);
+    margin-top: 60px;
+    flex-shrink: 0;
+}
+
+.atelier-cta {
+    text-align: center;
+    margin-top: var(--space-xl);
+}
+
+.btn-gold {
+    display: inline-block;
+    padding: 16px 44px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--mavi-dark);
+    background: var(--altin);
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232, 213, 163, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.btn-gold:hover::before {
+    opacity: 1;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200, 164, 92, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Values
+   ═══════════════════════════════════════════════════════ */
+
+.values {
+    padding: var(--space-2xl) var(--space-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+}
+
+.value-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+
+.value-item.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.value-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-sm);
+}
+
+.value-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.value-item h4 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--mavi-dark);
+    margin-bottom: var(--space-xs);
+    letter-spacing: 0.03em;
+}
+
+.value-item p {
+    font-size: 0.85rem;
+    color: rgba(15, 30, 46, 0.5);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Contact
+   ═══════════════════════════════════════════════════════ */
+
+.contact {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--inci);
+}
+
+.contact-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+}
+
+.contact-desc {
+    font-size: 1rem;
+    color: rgba(15, 30, 46, 0.6);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    font-weight: 300;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detail-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--altin-dark);
+    font-weight: 500;
+}
+
+.contact-detail span:last-child {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--mavi-dark);
+    letter-spacing: 0.02em;
+}
+
+.contact-note {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+/* Contact Form */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--mavi-dark);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(15, 30, 46, 0.15);
+    outline: none;
+    transition: border-color 0.3s ease;
+    letter-spacing: 0.02em;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: transparent;
+}
+
+.form-group label {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: rgba(15, 30, 46, 0.4);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label {
+    top: -8px;
+    font-size: 0.7rem;
+    color: var(--altin-dark);
+    letter-spacing: 0.08em;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--altin);
+}
+
+.form-group select {
+    cursor: pointer;
+    color: rgba(15, 30, 46, 0.4);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C8A45C' stroke-width='1'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right center;
+    padding-right: 24px;
+}
+
+.form-group select:valid {
+    color: var(--mavi-dark);
+}
+
+.form-group select option {
+    color: var(--mavi-dark);
+    background: white;
+}
+
+.form-group textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+.btn-submit {
+    align-self: flex-start;
+    margin-top: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════════ */
+
+.footer {
+    background: var(--mavi-dark);
+    color: var(--tas);
+    padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-xl);
+}
+
+.footer-brand p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: rgba(250, 247, 242, 0.4);
+    font-size: 1rem;
+    margin-top: var(--space-sm);
+    letter-spacing: 0.03em;
+}
+
+.footer-logo-svg {
+    width: 110px;
+    height: auto;
+}
+
+.footer-logo-ma,
+.footer-logo-vita {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    fill: var(--tas);
+}
+
+.footer-logo-ma {
+    font-weight: 300;
+}
+
+.footer-logo-vita {
+    font-weight: 400;
+}
+
+.footer-logo-crack {
+    stroke: var(--altin);
+    stroke-width: 1;
+    stroke-linecap: round;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.footer-col h4 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--altin-light);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.04em;
+}
+
+.footer-col a {
+    display: block;
+    text-decoration: none;
+    color: rgba(250, 247, 242, 0.45);
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin-bottom: var(--space-sm);
+    transition: color 0.3s ease;
+    letter-spacing: 0.03em;
+}
+
+.footer-col a:hover {
+    color: var(--altin);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    color: rgba(250, 247, 242, 0.25);
+    letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Reveal Animations
+   ═══════════════════════════════════════════════════════ */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.15s; }
+.reveal.delay-2 { transition-delay: 0.3s; }
+.reveal.delay-3 { transition-delay: 0.45s; }
+
+/* ═══════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .match-container {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+
+    .match-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .match-canvas-inner {
+        flex-direction: column;
+    }
+
+    .story-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story-visual {
+        order: -1;
+    }
+
+    .atelier-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step-divider {
+        width: 1px;
+        height: 40px;
+        margin: 0;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --space-xl: 60px;
+        --space-2xl: 80px;
+        --space-3xl: 120px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .hero-logo-ma,
+    .hero-logo-vita {
+        font-size: 56px;
+    }
+
+    .hero-tagline {
+        font-size: 1.05rem;
+    }
+
+    .collection-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .match-items {
+        grid-template-columns: 1fr;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .values-grid .value-item {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo-ma,
+    .hero-logo-vita {
+        font-size: 42px;
+    }
+
+    .philosophy-text {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .cursor,
+    .cursor-follower {
+        display: none;
+    }
+
+    html {
+        cursor: auto;
+    }
+}
+
+</style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <svg viewBox="0 0 120 120" class="loading-svg">
+                <defs>
+                    <linearGradient id="loadGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#D4B86A"/>
+                        <stop offset="50%" stop-color="#E8D5A3"/>
+                        <stop offset="100%" stop-color="#B8943D"/>
+                    </linearGradient>
+                </defs>
+                <!-- Monogram circle -->
+                <circle cx="60" cy="60" r="42" fill="none" stroke="rgba(250,247,242,0.12)" stroke-width="0.8"/>
+                <!-- M -->
+                <path d="M38 80 L44 48 L60 68 L76 48 L82 80" fill="none" stroke="rgba(250,247,242,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-m"/>
+                <!-- Gold crack -->
+                <path d="M24 72 C32 62 38 58 46 52 C52 48 56 44 58 38"
+                      fill="none" stroke="url(#loadGold)" stroke-width="1.2" stroke-linecap="round"
+                      class="loading-crack"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <svg viewBox="0 0 155 30" class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="navGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/>
+                            <stop offset="50%" stop-color="#E8D5A3"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Mini monogram: circle + M -->
+                    <circle cx="13" cy="15" r="10" fill="none" stroke="rgba(250,247,242,0.3)" stroke-width="0.6"/>
+                    <path d="M7 21 L9 11 L13 17 L17 11 L19 21" fill="none" stroke="rgba(250,247,242,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Tiny gold crack -->
+                    <path d="M3 20 C6 16 10 14 14 13" fill="none" stroke="url(#navGold)" stroke-width="0.7" stroke-linecap="round"/>
+                    <!-- Wordmark -->
+                    <text x="31" y="22" class="nav-logo-ma">Ma</text>
+                    <line x1="55" y1="12" x2="61" y2="18" class="nav-logo-crack"/>
+                    <text x="59" y="22" class="nav-logo-vita">Vita</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="#koleksiyon" class="nav-link">Koleksiyon</a>
+                <a href="#hikaye" class="nav-link">Hikâye</a>
+                <a href="#oyun" class="nav-link">Maç Atölyesi</a>
+                <a href="#atelier" class="nav-link">Atölye</a>
+                <a href="#iletisim" class="nav-link">İletişim</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#koleksiyon" class="mobile-link">Koleksiyon</a>
+            <a href="#hikaye" class="mobile-link">Hikâye</a>
+            <a href="#oyun" class="mobile-link">Maç Atölyesi</a>
+            <a href="#atelier" class="mobile-link">Atölye</a>
+            <a href="#iletisim" class="mobile-link">İletişim</a>
+        </div>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-texture"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-logo-wrap reveal">
+                <!-- MAVITA ARTISTIC LOGO -->
+                <svg viewBox="0 0 420 260" class="hero-logo" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- Gold gradients -->
+                        <linearGradient id="goldMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/>
+                            <stop offset="25%" stop-color="#E8D5A3"/>
+                            <stop offset="50%" stop-color="#C8A45C"/>
+                            <stop offset="75%" stop-color="#F0E4C8"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                        <linearGradient id="goldCrack" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#B8943D"/>
+                            <stop offset="30%" stop-color="#E8D5A3"/>
+                            <stop offset="60%" stop-color="#C8A45C"/>
+                            <stop offset="100%" stop-color="#D4B86A"/>
+                        </linearGradient>
+                        <linearGradient id="goldVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#E8D5A3"/>
+                            <stop offset="50%" stop-color="#C8A45C"/>
+                            <stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                        <!-- Glow filters -->
+                        <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="2" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="1" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- ═══ MONOGRAM: Enso Circle + M + Kintsugi Crack ═══ -->
+                    <g class="monogram-group">
+                        <!-- Outer enso circle — incomplete, brush-like -->
+                        <path d="M210 38
+                                 C256 38 295 56 316 85
+                                 C336 112 340 148 326 174
+                                 C312 200 283 216 250 220
+                                 C225 223 200 218 182 206"
+                              fill="none"
+                              stroke="rgba(250,247,242,0.12)"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              class="enso-circle"/>
+
+                        <!-- Inner subtle ring -->
+                        <circle cx="210" cy="130" r="72"
+                                fill="none"
+                                stroke="rgba(250,247,242,0.06)"
+                                stroke-width="0.5"/>
+
+                        <!-- The "M" Monogram — elegant diagonal strokes -->
+                        <g class="monogram-m" fill="none" stroke="rgba(250,247,242,0.85)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Left stem -->
+                            <path d="M177 178 L188 108"/>
+                            <!-- Right stem -->
+                            <path d="M243 178 L232 108"/>
+                            <!-- Center V — the meeting point -->
+                            <path d="M188 108 L210 158 L232 108"/>
+                        </g>
+
+                        <!-- The Kintsugi Crack — the gold repair line through the M -->
+                        <g filter="url(#goldGlow)" class="crack-group">
+                            <!-- Main crack — organic, hand-drawn feel -->
+                            <path d="M168 182
+                                     C174 168 180 155 187 148
+                                     C193 140 198 135 204 132
+                                     C209 128 212 122 213 116
+                                     C214 110 212 105 207 102
+                                     C203 100 198 102 195 107
+                                     C193 111 192 118 193 124
+                                     C195 130 199 133 204 133"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="1.8"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-path-main"/>
+
+                            <!-- Secondary crack branch -->
+                            <path d="M195 107 C198 95 208 87 218 85"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="1.2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-path-branch"
+                                  opacity="0.7"/>
+
+                            <!-- Tiny branch -->
+                            <path d="M207 102 C214 98 220 94 225 90"
+                                  fill="none"
+                                  stroke="url(#goldCrack)"
+                                  stroke-width="0.8"
+                                  stroke-linecap="round"
+                                  class="crack-path-tiny"
+                                  opacity="0.5"/>
+                        </g>
+
+                        <!-- Gold particles / dust around the crack -->
+                        <g filter="url(#particleGlow)" class="gold-particles">
+                            <circle cx="173" cy="175" r="1.2" fill="#E8D5A3" opacity="0.8"/>
+                            <circle cx="183" cy="152" r="0.8" fill="#C8A45C" opacity="0.6"/>
+                            <circle cx="200" cy="128" r="1.5" fill="#E8D5A3" opacity="0.7"/>
+                            <circle cx="215" cy="112" r="0.9" fill="#D4B86A" opacity="0.6"/>
+                            <circle cx="210" cy="100" r="1.1" fill="#E8D5A3" opacity="0.5"/>
+                            <circle cx="220" cy="88" r="0.7" fill="#C8A45C" opacity="0.4"/>
+                            <circle cx="193" cy="145" r="0.6" fill="#F0E4C8" opacity="0.7"/>
+                            <circle cx="176" cy="185" r="0.8" fill="#E8D5A3" opacity="0.5"/>
+                            <circle cx="205" cy="138" r="1.0" fill="#D4B86A" opacity="0.6"/>
+                            <circle cx="226" cy="93" r="0.5" fill="#E8D5A3" opacity="0.4"/>
+                        </g>
+                    </g>
+
+                    <!-- ═══ WORDMARK: Ma ——— Vita ═══ -->
+                    <g class="wordmark-group">
+                        <!-- Ma -->
+                        <text x="88" y="255" class="hero-logo-ma">Ma</text>
+
+                        <!-- Kintsugi bridge between Ma and Vita — the golden connection -->
+                        <g filter="url(#goldGlow)" class="wordmark-crack">
+                            <path d="M188 248
+                                     C194 244 198 238 201 235
+                                     C204 232 206 230 210 231
+                                     C214 232 216 234 219 236
+                                     C222 238 226 242 232 245"
+                                  fill="none"
+                                  stroke="url(#goldMain)"
+                                  stroke-width="1.6"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="crack-wordmark"/>
+                        </g>
+
+                        <!-- Vita -->
+                        <text x="232" y="255" class="hero-logo-vita">Vita</text>
+                    </g>
+                </svg>
+            </div>
+            <p class="hero-tagline reveal delay-1">Boşluklardaki hayat. Kırıktaki altın.</p>
+            <div class="hero-scroll reveal delay-2">
+                <span>Keşfet</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="scroll-icon">
+                    <path d="M12 5v14M5 12l7 7 7-7" stroke="#C8A45C" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FELSEFE ŞERİDİ ============ -->
+    <section class="philosophy-strip">
+        <div class="philosophy-inner">
+            <p class="philosophy-text reveal">
+                <span class="italic">Ma</span> — aradaki boşluk. Sessizliğin kendisi.
+                <span class="italic">Vita</span> — hayatın ta kendisi.
+                Aradaki altın çizgi: <span class="gold">Kintsugi</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============ KOLEKSİYON ============ -->
+    <section class="collection" id="koleksiyon">
+        <div class="section-header reveal">
+            <span class="section-tag">Koleksiyon</span>
+            <h2 class="section-title">Seçme Parçalar</h2>
+            <p class="section-desc">Her biri bir ustanın elinden. Her biri bir hikâye.</p>
+        </div>
+
+        <div class="collection-grid">
+            <!-- Ürün 1 — Kintsugi Kase Indigo -->
+            <article class="product-card reveal" data-category="mutfak">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1654738209839-571e0ff47323?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <ellipse cx="50" cy="45" rx="30" ry="22" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+                                <ellipse cx="50" cy="42" rx="20" ry="14" stroke="rgba(255,255,255,.15)" stroke-width="0.8"/>
+                                <path d="M28 40 C32 48 38 58 50 56 C62 54 68 46 72 38"
+                                      fill="none" stroke="url(#productGold1)" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+                                <path d="M33 55 C37 62 42 70 50 68 C58 66 63 60 67 54"
+                                      fill="none" stroke="url(#productGold1)" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <defs>
+                                    <linearGradient id="productGold1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#C8A45C"/><stop offset="50%" stop-color="#E8D5A3"/><stop offset="100%" stop-color="#B8943D"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Özel Koleksiyon</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Mutfak</span>
+                    <h3 class="product-name">Kintsugi Kase — Indigo</h3>
+                    <p class="product-desc">Japon porseleni, çatlakları 24 ayar altın tozuyla onarılmış. Her kase, kendi kırılma hikâyesiyle benzersiz. Kobalt mavisi sır, Edo dönemi geleneğinden.</p>
+                    <span class="product-price">₺4.200</span>
+                </div>
+            </article>
+
+            <!-- Ürün 2 — Oroİz Kolye -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1758995115555-766abbd9a491?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M35 20 C30 40 25 60 50 75 C75 60 70 40 65 20"
+                                      stroke="rgba(200,164,92,.5)" stroke-width="1.2" fill="none"/>
+                                <path d="M50 75 L50 88" stroke="rgba(200,164,92,.6)" stroke-width="1"/>
+                                <circle cx="50" cy="22" r="5" fill="none" stroke="rgba(200,164,92,.7)" stroke-width="1.2"/>
+                                <path d="M42 35 C45 45 48 55 50 60 C52 55 55 45 58 35"
+                                      fill="none" stroke="rgba(255,255,255,.3)" stroke-width="0.8" stroke-dasharray="3 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">En Çok Satan</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Oroİz Kolye — Kırık Hat</h3>
+                    <p class="product-desc">Kintsugi'deki altın çatlağın kolyeye dönüşmüş hali. Sterling gümüş üzerine 24 ayar altın kaplama. Her kolyenin çatlak deseni, döküm anındaki benzersiz akışla oluşur.</p>
+                    <span class="product-price">₺8.900</span>
+                </div>
+            </article>
+
+            <!-- Ürün 3 — LuceBlu Vazo -->
+            <article class="product-card reveal" data-category="aksesuar">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1761338349237-8446a4fd8317?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon dark-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M35 85 C35 60 30 40 38 25 C42 18 48 15 50 15 C52 15 58 18 62 25 C70 40 65 60 65 85"
+                                      stroke="rgba(27,58,92,.5)" stroke-width="1.4" fill="none"/>
+                                <path d="M42 30 C44 45 40 60 43 78" stroke="rgba(200,164,92,.55)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                <ellipse cx="50" cy="22" rx="8" ry="3" stroke="rgba(27,58,92,.3)" stroke-width="0.8" fill="none"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Yeni</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Aksesuar</span>
+                    <h3 class="product-name">LuceBlu Vazo — Ege Işığı</h3>
+                    <p class="product-desc">Venedik'te ağızdan üflenmiş cam, içinden geçen altın damarla. Ege güneşinin suya vurduğu anı yakalar. Her vazoda ışık farklı kırılır — tıpkı deniz gibi.</p>
+                    <span class="product-price">₺7.200</span>
+                </div>
+            </article>
+
+            <!-- Ürün 4 — Marea Bilezik -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1758995115643-1e8348bfde39?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <ellipse cx="50" cy="50" rx="28" ry="18" stroke="rgba(200,164,92,.45)" stroke-width="1.2"/>
+                                <path d="M22 50 C22 70 35 78 50 78 C65 78 78 70 78 50"
+                                      stroke="rgba(200,164,92,.6)" stroke-width="1.5" fill="none"/>
+                                <path d="M30 45 Q40 35 50 42 Q60 35 70 45"
+                                      stroke="rgba(255,255,255,.25)" stroke-width="0.8" fill="none"/>
+                                <circle cx="35" cy="48" r="2" fill="rgba(200,164,92,.5)"/>
+                                <circle cx="50" cy="43" r="2" fill="rgba(200,164,92,.6)"/>
+                                <circle cx="65" cy="48" r="2" fill="rgba(200,164,92,.5)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Marea Bilezik — Dalga</h3>
+                    <p class="product-desc">Ege'nin gelgit ritmi, 925 gümüş üzerine altın kaplamayla bileğe taşınıyor. İtalyan kuyumcu işçiliği. Açık uçları, tamamlanmamış bir hikâye gibi.</p>
+                    <span class="product-price">₺6.500</span>
+                </div>
+            </article>
+
+            <!-- Ürün 5 — Egeo Keten Örtü -->
+            <article class="product-card reveal" data-category="tekstil">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1755404389864-6f6cc98c29ac?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon dark-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <rect x="20" y="25" width="60" height="50" rx="1" stroke="rgba(27,58,92,.3)" stroke-width="1"/>
+                                <path d="M30 30 L35 50 L45 35 L55 55 L60 40 L70 45" stroke="rgba(200,164,92,.4)" stroke-width="0.8" fill="none"/>
+                                <path d="M30 60 L45 55 L60 65 L70 58" stroke="rgba(27,58,92,.2)" stroke-width="0.6" fill="none"/>
+                                <circle cx="28" cy="28" r="1.5" fill="rgba(200,164,92,.5)"/>
+                                <circle cx="68" cy="42" r="1.5" fill="rgba(200,164,92,.4)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Ev Tekstili</span>
+                    <h3 class="product-name">Egeo Keten Örtü — Kum</h3>
+                    <p class="product-desc">Urla'nın son keten dokuma atölyesinde, üçüncü kuşak bir ustanın tezgâhından. Doğal taş ve deniz kabuğu baskıları. Her kullanımda yumuşar, hikâyenize katılır.</p>
+                    <span class="product-price">₺3.600</span>
+                </div>
+            </article>
+
+            <!-- Ürün 6 — Tramonto Tabak -->
+            <article class="product-card reveal" data-category="mutfak">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1534273006427-1686266049b7?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="30" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>
+                                <circle cx="50" cy="50" r="24" stroke="rgba(255,255,255,.15)" stroke-width="0.8"/>
+                                <circle cx="50" cy="50" r="28" stroke="rgba(200,164,92,.5)" stroke-width="1.5" stroke-dasharray="4 6"/>
+                                <circle cx="50" cy="50" r="10" fill="none" stroke="rgba(200,164,92,.35)" stroke-width="0.8"/>
+                                <circle cx="50" cy="50" r="3" fill="rgba(200,164,92,.4)"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Sınırlı Seri</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Mutfak</span>
+                    <h3 class="product-name">Tramonto Tabak Seti — Günbatımı</h3>
+                    <p class="product-desc">Amalfi sahilinde güneşin denize düştüğü an, Japon seramiğine aktarıldı. 24 ayar altın rim, elle sürülür. 6 parça, her biri farklı bir günbatımı tonunda.</p>
+                    <span class="product-price">₺12.800</span>
+                </div>
+            </article>
+
+            <!-- Ürün 7 — Giunto Yüzük -->
+            <article class="product-card reveal" data-category="takı">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1758995115475-7b7d6eb060ba?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="20" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+                                <circle cx="50" cy="50" r="16" stroke="rgba(200,164,92,.5)" stroke-width="1.5"/>
+                                <path d="M42 38 C38 44 42 52 50 50 C58 48 62 54 58 60"
+                                      stroke="rgba(255,255,255,.35)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                <circle cx="50" cy="50" r="4" fill="none" stroke="rgba(200,164,92,.6)" stroke-width="0.8"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                    <span class="product-badge">Özel Koleksiyon</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Takı</span>
+                    <h3 class="product-name">Giunto Yüzük — Bağ</h3>
+                    <p class="product-desc">İki ayrı metal —sterling gümüş ve pirinç— altın bir çatlakla birleşiyor. Kintsugi'nin "birleşme" felsefesinin yüzüğe dökülmüş hali. Tek beden, el işçiliği.</p>
+                    <span class="product-price">₺5.800</span>
+                </div>
+            </article>
+
+            <!-- Ürün 8 — Brezza Perde -->
+            <article class="product-card reveal" data-category="tekstil">
+                <div class="product-image">
+                    <div class="product-placeholder" style="background-image: url('https://images.unsplash.com/photo-1782174177181-8c2898264d35?w=600&h=750&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 100 100" fill="none">
+                                <path d="M20 20 Q30 15 50 20 Q70 25 80 20" stroke="rgba(255,255,255,.2)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 35 Q35 25 50 32 Q65 25 80 35" stroke="rgba(255,255,255,.25)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 50 Q30 42 50 48 Q70 42 80 50" stroke="rgba(255,255,255,.2)" stroke-width="0.8" fill="none"/>
+                                <path d="M20 65 Q35 55 50 62 Q65 55 80 65" stroke="rgba(255,255,255,.15)" stroke-width="0.8" fill="none"/>
+                                <path d="M40 15 C42 35 38 55 45 75" stroke="rgba(200,164,92,.35)" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                <path d="M60 15 C58 35 62 55 55 75" stroke="rgba(200,164,92,.25)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-overlay">
+                        <span class="product-view">İncele</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Ev Tekstili</span>
+                    <h3 class="product-name">Brezza Perde — Meltem</h3>
+                    <p class="product-desc">Ege melteminin pencereden süzülüşü, keten-pamuk karışımı bir dokumaya dönüştü. Işığı kırmadan süzer, odayı yıkar. Aile dokuma tezgâhında üretilir, doğal kök boya.</p>
+                    <span class="product-price">₺5.400</span>
+                </div>
+            </article>
+        </div>
+
+        <div class="collection-cta reveal">
+            <a href="#" class="btn-outline">Tüm Koleksiyonu Gör</a>
+        </div>
+    </section>
+
+    <!-- ============ MAÇ ATÖLYESİ (OYUN) ============ -->
+    <section class="match-game" id="oyun">
+        <div class="section-header reveal">
+            <span class="section-tag">Maç Atölyesi</span>
+            <h2 class="section-title">Birlikte Eşleştir</h2>
+            <p class="section-desc">Parçaları bir araya getir, kendi kompozisyonunu yarat. Tıkla, eşle, ilham al.</p>
+        </div>
+
+        <div class="match-container">
+            <div class="match-panel match-left" id="matchLeft">
+                <h3 class="match-panel-title">Parça Seç</h3>
+                <div class="match-items">
+                    <div class="match-item" data-match="1" data-name="Indigo Kase">
+                        <span class="match-emoji">🏺</span>
+                        <span class="match-label">Kintsugi Kase — Indigo</span>
+                        <span class="match-cat">Mutfak</span>
+                    </div>
+                    <div class="match-item" data-match="2" data-name="Kırık Hat Kolye">
+                        <span class="match-emoji">📿</span>
+                        <span class="match-label">Oroİz Kolye — Kırık Hat</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                    <div class="match-item" data-match="3" data-name="Günbatımı Tabak">
+                        <span class="match-emoji">🍽️</span>
+                        <span class="match-label">Tramonto Tabak Seti</span>
+                        <span class="match-cat">Mutfak</span>
+                    </div>
+                    <div class="match-item" data-match="4" data-name="Dalga Bilezik">
+                        <span class="match-emoji">💫</span>
+                        <span class="match-label">Marea Bilezik — Dalga</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-canvas" id="matchCanvas">
+                <div class="match-canvas-inner">
+                    <div class="match-slot slot-left" id="slotLeft">
+                        <span class="slot-placeholder">?</span>
+                        <span class="slot-hint">Sol parça</span>
+                    </div>
+                    <div class="match-connector">
+                        <svg viewBox="0 0 60 60" class="match-plus">
+                            <circle cx="30" cy="30" r="28" fill="none" stroke="#C8A45C" stroke-width="0.8" opacity="0.4"/>
+                            <line x1="18" y1="30" x2="42" y2="30" stroke="#C8A45C" stroke-width="1"/>
+                            <line x1="30" y1="18" x2="30" y2="42" stroke="#C8A45C" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="match-slot slot-right" id="slotRight">
+                        <span class="slot-placeholder">?</span>
+                        <span class="slot-hint">Sağ parça</span>
+                    </div>
+                </div>
+                <div class="match-result" id="matchResult">
+                    <p class="match-result-text">İki parça seç, uyumlarını gör.</p>
+                </div>
+                <button class="btn-reset" id="matchReset">Temizle</button>
+            </div>
+
+            <div class="match-panel match-right" id="matchRight">
+                <h3 class="match-panel-title">Eşlik Et</h3>
+                <div class="match-items">
+                    <div class="match-item" data-match="5" data-name="Kum Keten Örtü">
+                        <span class="match-emoji">🧵</span>
+                        <span class="match-label">Egeo Keten Örtü — Kum</span>
+                        <span class="match-cat">Tekstil</span>
+                    </div>
+                    <div class="match-item" data-match="6" data-name="Meltem Perde">
+                        <span class="match-emoji">🪟</span>
+                        <span class="match-label">Brezza Perde — Meltem</span>
+                        <span class="match-cat">Tekstil</span>
+                    </div>
+                    <div class="match-item" data-match="7" data-name="LuceBlu Vazo">
+                        <span class="match-emoji">🏮</span>
+                        <span class="match-label">LuceBlu Vazo — Ege Işığı</span>
+                        <span class="match-cat">Aksesuar</span>
+                    </div>
+                    <div class="match-item" data-match="8" data-name="Giunto Yüzük">
+                        <span class="match-emoji">💍</span>
+                        <span class="match-label">Giunto Yüzük — Bağ</span>
+                        <span class="match-cat">Takı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ HİKAYE ============ -->
+    <section class="story" id="hikaye">
+        <div class="story-grid">
+            <div class="story-visual reveal">
+                <div class="story-image">
+                    <div class="story-placeholder" style="background-image: url('https://images.unsplash.com/photo-1751810105872-21cf6b4dc92b?w=800&h=800&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="story-kintsugi">
+                            <svg viewBox="0 0 200 200" class="story-svg">
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(200,164,92,.15)" stroke-width="0.5"/>
+                                <path d="M60 100 Q75 70 100 95 T140 90" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+                                <path d="M55 80 Q80 130 110 100" fill="none" stroke="#C8A45C" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <path d="M120 60 Q105 85 135 110" fill="none" stroke="#C8A45C" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+                                <circle cx="100" cy="100" r="3" fill="#C8A45C" opacity="0.6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="story-content">
+                <div class="story-text reveal">
+                    <span class="section-tag">MaVita Hikâyesi</span>
+                    <h2 class="section-title">Kırığın İçindeki Altın</h2>
+                    <p class="story-para">Ailem üç kuşaktır ev tekstili üretiyor. Her dokumanın, her ipliğin bir hikâyesi vardı. Ama ben o hikâyeyi daha ileri taşımak istedim — bir adım öteye, <em>mavinin ötesine.</em></p>
+                    <p class="story-para">Japonya'da ilk kez bir Kintsugi ustasını izlediğimde anladım: Kırılan her şey, altınla onarıldığında eskisinden daha değerli olur. Bu felsefe, MaVita'nın doğuşu oldu.</p>
+                    <p class="story-para">Bugün MaVita'da, Ege'nin mavisiyle İtalyan zarafetini, Japon sabrıyla birleştiriyoruz. Her parçamız — ister bir tabak, ister bir kolye — o altın çatlağın izini taşır.</p>
+                    <p class="story-signature gold">— MaVita Atölyesi, Urla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ATÖLYE ============ -->
+    <section class="atelier" id="atelier">
+        <div class="section-header reveal">
+            <span class="section-tag">Atölye</span>
+            <h2 class="section-title">Sizin İçin Tasarlıyoruz</h2>
+            <p class="section-desc">Özel siparişleriniz, MaVita ustalarının ellerinde hayat bulur.</p>
+        </div>
+
+        <div class="atelier-steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <h3 class="step-title">Keşif</h3>
+                <p class="step-desc">Sizi, mekânınızı ve hikâyenizi tanıyoruz. İlham panonuzu birlikte oluşturuyoruz.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-1">
+                <div class="step-number">02</div>
+                <h3 class="step-title">Tasarım</h3>
+                <p class="step-desc">Ustalarımız, sizin hikâyenizi altın, gümüş, seramik ve ketenle yorumluyor.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-2">
+                <div class="step-number">03</div>
+                <h3 class="step-title">Üretim</h3>
+                <p class="step-desc">Her parça elde şekillenir. Acele etmeyiz. Sabır, MaVita'nın en değerli malzemesidir.</p>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step reveal delay-3">
+                <div class="step-number">04</div>
+                <h3 class="step-title">Teslim</h3>
+                <p class="step-desc">Eseriniz, özel MaVita kutusunda, bir Kintsugi hikâyesiyle birlikte size ulaşır.</p>
+            </div>
+        </div>
+
+        <div class="atelier-cta reveal">
+            <a href="#iletisim" class="btn-gold">Özel Tasarım Talep Et</a>
+        </div>
+    </section>
+
+    <!-- ============ DEĞERLER ============ -->
+    <section class="values">
+        <div class="values-grid">
+            <div class="value-item reveal">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="none" stroke="#C8A45C" stroke-width="0.8"/><path d="M20 8v24M8 20h24" stroke="#C8A45C" stroke-width="0.6"/></svg>
+                </div>
+                <h4>El İşçiliği</h4>
+                <p>Her parça, ustanın elinden çıkar. Makine değil, insan.</p>
+            </div>
+            <div class="value-item reveal delay-1">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><path d="M8 30c0-6 5-12 12-12s12 6 12 12" stroke="#C8A45C" stroke-width="0.8" fill="none"/><circle cx="20" cy="14" r="4" stroke="#C8A45C" stroke-width="0.8" fill="none"/></svg>
+                </div>
+                <h4>Aile Mirası</h4>
+                <p>Üç kuşağın dokuma bilgisi, şimdi yeni formlarda.</p>
+            </div>
+            <div class="value-item reveal delay-2">
+                <div class="value-icon">
+                    <svg viewBox="0 0 40 40"><rect x="6" y="10" width="28" height="22" rx="2" stroke="#C8A45C" stroke-width="0.8" fill="none"/><path d="M14 20l4 4 8-8" stroke="#C8A45C" stroke-width="0.8" fill="none"/></svg>
+                </div>
+                <h4>Sürdürülebilirlik</h4>
+                <p>Doğal malzeme, yerel üretim, minimum atık.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ İLETİŞİM ============ -->
+    <section class="contact" id="iletisim">
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <span class="section-tag">İletişim</span>
+                <h2 class="section-title">Sizi Dinleyelim</h2>
+                <p class="contact-desc">Özel bir tasarım, koleksiyon hakkında soru ya da sadece merhaba demek için.</p>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <span class="detail-label">Atölye</span>
+                        <span>Urla, İzmir — Ege Kıyısı</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-label">E-Posta</span>
+                        <span>merhaba@mavita.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <span class="detail-label">Telefon</span>
+                        <span>+90 (232) 700 00 00</span>
+                    </div>
+                </div>
+                <p class="contact-note gold">Atölye ziyaretleri randevu iledir.</p>
+            </div>
+            <div class="contact-form-wrap reveal delay-1">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" required placeholder="Adınız">
+                        <label for="name">Adınız</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required placeholder="E-postanız">
+                        <label for="email">E-postanız</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="interest">
+                            <option value="">İlgi Alanınız</option>
+                            <option value="takı">Özel Tasarım Takı</option>
+                            <option value="mutfak">Mutfak Koleksiyonu</option>
+                            <option value="tekstil">Ev Tekstili</option>
+                            <option value="ozel">Kişiye Özel Sipariş</option>
+                            <option value="diger">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" required placeholder="Mesajınız"></textarea>
+                        <label for="message">Mesajınız</label>
+                    </div>
+                    <button type="submit" class="btn-gold btn-submit">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <svg viewBox="0 0 120 28" class="footer-logo-svg">
+                    <defs>
+                        <linearGradient id="ftGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#D4B86A"/><stop offset="100%" stop-color="#B8943D"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Mini monogram -->
+                    <circle cx="11" cy="14" r="8" fill="none" stroke="rgba(250,247,242,0.2)" stroke-width="0.5"/>
+                    <path d="M5 19 L7 11 L11 15 L15 11 L17 19" fill="none" stroke="rgba(250,247,242,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17 C5 14 8 13 11 12" fill="none" stroke="url(#ftGold)" stroke-width="0.6" stroke-linecap="round"/>
+                    <!-- Wordmark -->
+                    <text x="27" y="21" class="footer-logo-ma">Ma</text>
+                    <line x1="49" y1="11" x2="54" y2="17" class="footer-logo-crack"/>
+                    <text x="53" y="21" class="footer-logo-vita">Vita</text>
+                </svg>
+                <p>Boşluklardaki hayat. Kırıktaki altın.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <a href="#koleksiyon">Koleksiyon</a>
+                    <a href="#hikaye">Hikâye</a>
+                    <a href="#oyun">Maç Atölyesi</a>
+                </div>
+                <div class="footer-col">
+                    <h4>MaVita</h4>
+                    <a href="#atelier">Atölye</a>
+                    <a href="#iletisim">İletişim</a>
+                    <a href="#">SSS</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Takip Et</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Pinterest</a>
+                    <a href="#">Journal</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MaVita. Tüm hakları saklıdır. Urla, İzmir'de üretilmiştir.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+/* ═══════════════════════════════════════════════════════
+   MaVita — Interactive Features
+   ═══════════════════════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ═══════════════════════════════════════════════════
+    // Loading Screen
+    // ═══════════════════════════════════════════════════
+
+    const loadingScreen = document.getElementById('loadingScreen');
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 1200);
+    });
+
+    // Fallback: hide loading even if load event fires early
+    setTimeout(() => {
+        if (!loadingScreen.classList.contains('hidden')) {
+            loadingScreen.classList.add('hidden');
+        }
+    }, 3000);
+
+    // ═══════════════════════════════════════════════════
+    // Custom Cursor
+    // ═══════════════════════════════════════════════════
+
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+
+    if (cursor && cursorFollower && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Instant dot
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        // Smooth follower with requestAnimationFrame
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.12;
+            followerY += (mouseY - followerY) * 0.12;
+
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Enlarge follower on interactive elements
+        const interactiveElements = document.querySelectorAll(
+            'a, button, .nav-toggle, .product-card, .match-item, .product-overlay, input, textarea, select, .btn-outline, .btn-gold, .btn-reset'
+        );
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorFollower.classList.add('hover');
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorFollower.classList.remove('hover');
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // Navbar Scroll Effect
+    // ═══════════════════════════════════════════════════
+
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+
+        if (scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        lastScroll = scrollY;
+    });
+
+    // ═══════════════════════════════════════════════════
+    // Mobile Menu
+    // ═══════════════════════════════════════════════════
+
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    function toggleMenu() {
+        const isOpen = navToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    navToggle.addEventListener('click', toggleMenu);
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // ═══════════════════════════════════════════════════
+    // Scroll Reveal (Intersection Observer)
+    // ═══════════════════════════════════════════════════
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ═══════════════════════════════════════════════════
+    // Product Card Reveal
+    // ═══════════════════════════════════════════════════
+
+    const productCards = document.querySelectorAll('.product-card');
+
+    const productObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Stagger the reveals
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, index * 120);
+                productObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -30px 0px'
+    });
+
+    productCards.forEach(card => productObserver.observe(card));
+
+    // ═══════════════════════════════════════════════════
+    // Step Reveal (Atelier)
+    // ═══════════════════════════════════════════════════
+
+    const steps = document.querySelectorAll('.step');
+    const stepObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                stepObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    steps.forEach(step => stepObserver.observe(step));
+
+    // Value items reveal
+    const valueItems = document.querySelectorAll('.value-item');
+    const valueObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                valueObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    valueItems.forEach(item => valueObserver.observe(item));
+
+    // ═══════════════════════════════════════════════════
+    //  Maç Atölyesi — Product Match Game
+    // ═══════════════════════════════════════════════════
+
+    const matchItems = document.querySelectorAll('.match-item');
+    const slotLeft = document.getElementById('slotLeft');
+    const slotRight = document.getElementById('slotRight');
+    const matchResult = document.getElementById('matchResult');
+    const matchReset = document.getElementById('matchReset');
+
+    let leftSelection = null;
+    let rightSelection = null;
+
+    // Harmony pairing descriptions
+    const harmonyPairs = {
+        // Each pair key uses data-name values
+        'Indigo Kase-Kum Keten Örtü': {
+            text: 'Kintsugi kasenin altın çatlakları, keten örtünün doğal dokusuyla buluşuyor. Ege sofrası için kusursuz.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Indigo Kase-Meltem Perde': {
+            text: 'İndigo porselenin derinliği, meltem perdenin havadar dokusuyla ferahlıyor. Sakin bir köşe hayali.',
+            score: '★ ★ ★ ★'
+        },
+        'Indigo Kase-LuceBlu Vazo': {
+            text: 'İki Japon-İtalyan eseri yan yana. Kase ve vazo, mavinin iki tonuyla bütünleşiyor.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Indigo Kase-Giunto Yüzük': {
+            text: 'Mavi porselenin dinginliği, altın çatlaklı yüzüğün enerjisiyle tamamlanıyor.',
+            score: '★ ★ ★ ★'
+        },
+        'Kırık Hat Kolye-Kum Keten Örtü': {
+            text: 'Altın çatlak formu, ketenin ham dokusu üzerinde parlıyor. Kontrastların dansı.',
+            score: '★ ★ ★ ★'
+        },
+        'Kırık Hat Kolye-Meltem Perde': {
+            text: 'Pencereden süzülen ışık, kolyenin altın çatlağında kırılıyor. Büyüleyici.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Kırık Hat Kolye-LuceBlu Vazo': {
+            text: 'Kolyedeki altın çizgi, vazodaki altın damarla aynı dili konuşuyor. Kintsugi imzası.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Kırık Hat Kolye-Giunto Yüzük': {
+            text: 'Boyun ve parmakta iki Kintsugi eseri. MaVita takı koleksiyonunun zirvesi.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Günbatımı Tabak-Kum Keten Örtü': {
+            text: 'Amalfi günbatımı renkleri, Ege keteniyle sıcak bir sofra kuruyor.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Günbatımı Tabak-Meltem Perde': {
+            text: 'Günbatımı sıcaklığı ve meltem serinliği. Dengeli bir Akdeniz kompozisyonu.',
+            score: '★ ★ ★ ★'
+        },
+        'Günbatımı Tabak-LuceBlu Vazo': {
+            text: 'İtalyan güneşi ve Ege mavisi aynı masada. Sofranın iki yıldızı.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Günbatımı Tabak-Giunto Yüzük': {
+            text: 'Sofradaki altın rim, parmaktaki altın çatlakla selamlaşıyor.',
+            score: '★ ★ ★ ★'
+        },
+        'Dalga Bilezik-Kum Keten Örtü': {
+            text: 'Bilezikteki dalga formu, ketenin doğal dokusuyla Ege\'nin iki halini taşıyor.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Dalga Bilezik-Meltem Perde': {
+            text: 'Dalgalar ve meltem — Ege\'nin en saf iki ritmi bir arada.',
+            score: '★ ★ ★ ★ ★'
+        },
+        'Dalga Bilezik-LuceBlu Vazo': {
+            text: 'Gümüş dalgalar ve camdaki altın damar. Suyun ve ışığın buluşması.',
+            score: '★ ★ ★ ★'
+        },
+        'Dalga Bilezik-Giunto Yüzük': {
+            text: 'Bilekte dalga, parmakta bağ. MaVita takılarının tamamlayıcı gücü.',
+            score: '★ ★ ★ ★ ★'
+        }
+    };
+
+    function getHarmonyKey(leftName, rightName) {
+        // Try both orderings
+        const key1 = `${leftName}-${rightName}`;
+        const key2 = `${rightName}-${leftName}`;
+        return harmonyPairs[key1] || harmonyPairs[key2] || null;
+    }
+
+    function renderSlot(slot, itemData) {
+        slot.innerHTML = `
+            <div class="slot-content">
+                <span class="match-emoji">${itemData.emoji}</span>
+                <span class="match-label">${itemData.name}</span>
+            </div>
+        `;
+        slot.classList.add('filled');
+    }
+
+    function clearSlot(slot) {
+        slot.innerHTML = `
+            <span class="slot-placeholder">?</span>
+            <span class="slot-hint">${slot === slotLeft ? 'Sol parça' : 'Sağ parça'}</span>
+        `;
+        slot.classList.remove('filled');
+    }
+
+    function updateMatchResult(leftData, rightData) {
+        const harmony = getHarmonyKey(leftData.name, rightData.name);
+
+        if (harmony) {
+            matchResult.innerHTML = `
+                <div class="match-result-content">
+                    <p class="match-result-text match-found">${harmony.text}</p>
+                    <span class="match-score">${harmony.score}</span>
+                </div>
+            `;
+        } else {
+            matchResult.innerHTML = `
+                <p class="match-result-text match-found">
+                    ✦ ${leftData.name} & ${rightData.name} — <br>beklenmedik ama ilham verici bir eşleşme.
+                </p>
+            `;
+        }
+    }
+
+    function resetGame() {
+        leftSelection = null;
+        rightSelection = null;
+        clearSlot(slotLeft);
+        clearSlot(slotRight);
+        matchResult.innerHTML = `
+            <p class="match-result-text">İki parça seç, uyumlarını gör.</p>
+        `;
+        document.querySelectorAll('.match-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+    }
+
+    // Item click handlers
+    matchItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const side = item.closest('.match-left') ? 'left' :
+                         item.closest('.match-right') ? 'right' : null;
+            if (!side) return;
+
+            const itemData = {
+                name: item.dataset.name,
+                emoji: item.querySelector('.match-emoji').textContent,
+                cat: item.querySelector('.match-cat').textContent,
+                matchId: item.dataset.match
+            };
+
+            if (side === 'left') {
+                // Deselect previous left item
+                document.querySelectorAll('.match-left .match-item').forEach(i => i.classList.remove('selected'));
+
+                if (leftSelection && leftSelection.matchId === itemData.matchId) {
+                    // Clicking same item — deselect
+                    leftSelection = null;
+                    clearSlot(slotLeft);
+                    matchResult.innerHTML = `<p class="match-result-text">İki parça seç, uyumlarını gör.</p>`;
+                    return;
+                }
+
+                item.classList.add('selected');
+                leftSelection = itemData;
+                renderSlot(slotLeft, itemData);
+
+            } else if (side === 'right') {
+                document.querySelectorAll('.match-right .match-item').forEach(i => i.classList.remove('selected'));
+
+                if (rightSelection && rightSelection.matchId === itemData.matchId) {
+                    rightSelection = null;
+                    clearSlot(slotRight);
+                    matchResult.innerHTML = `<p class="match-result-text">İki parça seç, uyumlarını gör.</p>`;
+                    return;
+                }
+
+                item.classList.add('selected');
+                rightSelection = itemData;
+                renderSlot(slotRight, itemData);
+            }
+
+            // If both slots filled, show harmony
+            if (leftSelection && rightSelection) {
+                updateMatchResult(leftSelection, rightSelection);
+            }
+        });
+    });
+
+    // Click on filled slot to clear it
+    slotLeft.addEventListener('click', () => {
+        if (leftSelection) {
+            document.querySelectorAll('.match-left .match-item').forEach(i => i.classList.remove('selected'));
+            leftSelection = null;
+            clearSlot(slotLeft);
+            if (!rightSelection) {
+                matchResult.innerHTML = `<p class="match-result-text">İki parça seç, uyumlarını gör.</p>`;
+            } else {
+                matchResult.innerHTML = `<p class="match-result-text">Sol parçayı seç, uyumu tamamla.</p>`;
+            }
+        }
+    });
+
+    slotRight.addEventListener('click', () => {
+        if (rightSelection) {
+            document.querySelectorAll('.match-right .match-item').forEach(i => i.classList.remove('selected'));
+            rightSelection = null;
+            clearSlot(slotRight);
+            if (!leftSelection) {
+                matchResult.innerHTML = `<p class="match-result-text">İki parça seç, uyumlarını gör.</p>`;
+            } else {
+                matchResult.innerHTML = `<p class="match-result-text">Sağ parçayı seç, uyumu tamamla.</p>`;
+            }
+        }
+    });
+
+    // Reset button
+    matchReset.addEventListener('click', resetGame);
+
+    // ═══════════════════════════════════════════════════
+    // Contact Form
+    // ═══════════════════════════════════════════════════
+
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const btn = contactForm.querySelector('.btn-submit');
+        const originalText = btn.textContent;
+
+        // Simulate sending
+        btn.textContent = 'Gönderiliyor...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.textContent = 'Mesajınız Ulaştı ✦';
+            btn.style.background = '#2A5580';
+            btn.style.color = '#FAF7F2';
+
+            // Reset form
+            contactForm.reset();
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.disabled = false;
+            }, 3000);
+        }, 1500);
+    });
+
+    // ═══════════════════════════════════════════════════
+    // Smooth Scroll for Nav Links
+    // ═══════════════════════════════════════════════════
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                const navHeight = navbar.offsetHeight + 20;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // ═══════════════════════════════════════════════════
+    // Parallax Effect on Hero
+    // ═══════════════════════════════════════════════════
+
+    const heroContent = document.querySelector('.hero-content');
+    const heroBg = document.querySelector('.hero-bg');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+
+        if (scrollY < window.innerHeight) {
+            const parallax = scrollY * 0.3;
+            heroContent.style.transform = `translateY(${parallax}px)`;
+            heroContent.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
+
+            if (heroBg) {
+                heroBg.style.transform = `scale(${1 + scrollY * 0.0003})`;
+            }
+        }
+    });
+
+    // ═══════════════════════════════════════════════════
+    // Crack Animation Replay on Logo Hover
+    // ═══════════════════════════════════════════════════
+
+    const heroLogoWrap = document.querySelector('.hero-logo-wrap');
+    if (heroLogoWrap) {
+        heroLogoWrap.addEventListener('mouseenter', () => {
+            const cracks = document.querySelectorAll('.crack-path-main, .crack-path-branch, .crack-path-tiny, .crack-wordmark');
+            cracks.forEach(crack => {
+                crack.style.animation = 'none';
+                crack.offsetHeight; // trigger reflow
+                crack.style.animation = '';
+            });
+        });
+    }
+
+}); // End DOMContentLoaded
+
+</script>
+</body>
 </html>
+
+
 
